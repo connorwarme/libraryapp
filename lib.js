@@ -7,7 +7,7 @@ const book = function(title, author, genre, pages, year) {
     this.year = year;
 }
 const bookAdd = function(input) {
-    input += library;
+    library.push(input);
 }
 const mainbody = document.querySelector('div');
 const display = function() {
@@ -32,30 +32,73 @@ const display = function() {
     year.textContent = `Published: ${library[i].year}`;
     card.appendChild(year);
     const read = document.createElement('input');
-    read.setAttribute('type', 'radio');
-    read.textContent = `Read?`;
+    read.classList.add('read');
+    read.setAttribute('type', 'button');
+    read.setAttribute('id', 'read');
+    read.setAttribute('value', `Read`)
     card.appendChild(read);
+    const removecontainer = document.createElement('div');
+    card.appendChild(removecontainer);
     const remove = document.createElement('button');
+    remove.classList.add('remove');
     remove.textContent = `Remove book from library`;
-    card.appendChild(remove);
+    removecontainer.appendChild(remove);
     }
+    listener();
 }
 const book1 = new book("The Outlaw Ocean", "Ian Urbina", "Investigative Journalism", 560, 2019);
 const book2 = new book("Black Mass", "Dick Lehr", "Investigative Journalism", 448, 2012);
 library = [book1, book2];
-const addContainer = document.createElement('div');
-addContainer.classList.add('addC');
-mainbody.appendChild(addContainer);
-const addButton = document.createElement('button');
-addButton.classList.add('add');
-addButton.textContent = `Add a Title`;
-addContainer.appendChild(addButton);
-// addButton.addEventListener('click', e => {
-    //prompt (maybe form?) with input lines for book
-    //bookAdd function --> add to library array
-    //update display with card for each object in library array
 
-//})
+const addButton = document.querySelector('button.add');
+addButton.addEventListener('click', e => {
+    const newTitle = new book(`${prompt(`Title:`)}`, `${prompt(`Author:`)}`, `${prompt(`Genre:`)}`, `${prompt(`Pages:`)}`, `${prompt(`Year:`)}`);
+    console.log(newTitle);
+    bookAdd(newTitle);
+    console.log(library);
+    display();
+})
+const listener = function() {
+const removeButton = Array.from(document.querySelectorAll('button.remove'));
+removeButton.forEach(function(part, index) {
+    removeButton[index].addEventListener('click', e => {
+        console.log(index);
+        for (i=0; i<library.length; i++) {
+            const libcards = Array.from(document.querySelectorAll('div.libcard'));
+        if (index == libcards[i].id) {
+            mainbody.removeChild(libcards[i]);
+            library.splice(index, 1);
+            console.log(library);
+        };
+    }})
+})
+const readButton = Array.from(document.querySelectorAll('input.read'));
+console.log(readButton);
+readButton.forEach(function(part, index) {
+    readButton[index].addEventListener('click', e => {
+        console.log(e.target);
+        readButton[index].classList.toggle('unread');
+        if (readButton[index].classList.value == "read unread") {
+            readButton[index].setAttribute('value', 'Unread');
+        } else {
+            readButton[index].setAttribute('value', 'Read');
+        };
+        // const unread = Array.from(document.querySelectorAll('input.read.unread'));
+        // console.log(unread);
+        // unread.forEach(function(part, i) {
+        //     unread[i].setAttribute('value', 'Unread');
+        // })
+    })
+})
+}
+
+//issues:
+//typeerror: libcards[i] is undefined (but it is still removing the card from view)
+//read status would be cool as a toggle (read/unread) with different colors
+//
+
+
+
 // function display(book) {
 //     const div = document.createElement('div');
 //     mainbody.appendChild(div);
