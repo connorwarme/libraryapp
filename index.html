@@ -6,9 +6,47 @@
     <script rel="javascript" src="lib.js" defer></script>
 </head>
 <body>
-    <div class="body">
-        <div class="addcontainer">
-            <button class="add">Add a Title</button>
+<div class="body">
+    <div class="header">
+        <h4>LibraryApp</h4>
+    </div>
+    <div class="main">
+    <div class="addcontainer">
+        <button class="add">Add a Title</button>
+    </div>
+    <div class="addmodal">
+        <div class="modalContent">
+            <div class="closecontainer">
+            <span class="close">&times;</span>
+            </div>
+            <div class="addForm">
+            <div class="title">
+            <label for="title">Title:</label>
+            <input type="text" class="form" id="title"><br>
+            </div>
+            <div class="author">
+            <label for="author">Author:</label>
+            <input type="text" class="form" id="author"><br>
+            </div>
+            <div class="genre">
+            <label for="genre">Genre:</label>
+            <input type="text" class="form" id="genre"><br>
+            </div>
+            <div class="pages">
+            <label for="pages">Pages:</label>
+            <input type="text" class="form" id="pages"><br>
+            </div>
+            <div class="year">
+            <label for="year">Year:</label>
+            <input type="text" class="form" id="year"><br>
+            </div>
+            <div class="modalButtons">
+            <input type="submit" class="submit" value="Submit">
+            <input type="reset" class="reset" value="Reset">
+            </div>
+            </div>
         </div>
     </div>
+    </div>
+</div>
 </body>

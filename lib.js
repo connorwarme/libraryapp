@@ -49,12 +49,13 @@ const display = function() {
 const book1 = new book("The Outlaw Ocean", "Ian Urbina", "Investigative Journalism", 560, 2019);
 const book2 = new book("Black Mass", "Dick Lehr", "Investigative Journalism", 448, 2012);
 library = [book1, book2];
-
+const modal = document.querySelector('div.addmodal');
 const addButton = document.querySelector('button.add');
 addButton.addEventListener('click', e => {
-    const newTitle = new book(`${prompt(`Title:`)}`, `${prompt(`Author:`)}`, `${prompt(`Genre:`)}`, `${prompt(`Pages:`)}`, `${prompt(`Year:`)}`);
-    console.log(newTitle);
-    bookAdd(newTitle);
+    modal.style.display = "block";
+    // const newTitle = new book(`${prompt(`Title:`)}`, `${prompt(`Author:`)}`, `${prompt(`Genre:`)}`, `${prompt(`Pages:`)}`, `${prompt(`Year:`)}`);
+    // console.log(newTitle);
+    // bookAdd(newTitle);
     console.log(library);
     display();
 })
@@ -83,11 +84,6 @@ readButton.forEach(function(part, index) {
         } else {
             readButton[index].setAttribute('value', 'Read');
         };
-        // const unread = Array.from(document.querySelectorAll('input.read.unread'));
-        // console.log(unread);
-        // unread.forEach(function(part, i) {
-        //     unread[i].setAttribute('value', 'Unread');
-        // })
     })
 })
 }
@@ -106,6 +102,8 @@ readButton.forEach(function(part, index) {
 // }
 //ideas:
 //outline of card with + inside, as the add button
-//background? maybe the desert
+//event listeners and functions for close, submit, reset on "+"
+//figure out how to keep from duplicating libcards (or just wipe slate clean before running display() again)
+//header and footer. clever name? quote?
 // save data (to cloud? login feature needed?)
 // "share my library" feature
