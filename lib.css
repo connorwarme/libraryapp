@@ -147,3 +147,46 @@
     background-color: aliceblue;
     opacity: 0.6;
 }
+.read {
+    display: none;
+}
+.toggle {
+    display: block;
+    width: 100px;
+    height: 25px;
+    background-color: red;
+    border-radius: 50px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow:0 0 3px #fff,
+    0 0 5px #fff,
+    0 0 7px #fff,
+    0 0 11px rgb(250, 39, 1),
+    0 0 15px rgb(243, 51, 17),
+    0 0 19px rgb(248, 61, 29),
+    0 0 27px rgb(245, 113, 90),
+    0 0 31px rgb(247, 167, 153);
+}
+.toggle::after {
+    content: "";
+    width: 21px;
+    height: 21px;
+    background-color: #e8f5f7;
+    position: absolute;
+    border-radius: 10.5px;
+    top: 2px;
+    left: 5px;
+    transition: 0.5s;
+}
+.active::after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    }
+.active {
+    background-color: green;
+}
+.toggle:active:after {
+    width: 25px;
+}
+ 

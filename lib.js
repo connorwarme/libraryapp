@@ -9,8 +9,11 @@ const book = function(title, author, genre, pages, year) {
 const bookAdd = function(input) {
     library.push(input);
 }
-const mainbody = document.querySelector('div');
+let boomButton = document.querySelectorAll('input.read');
+let label = document.querySelectorAll('label.toggle');
+const mainbody = document.querySelector('div.main');
 const display = function() {
+    clearCards();
     for (i=0; i<library.length; i++) {
     const card = document.createElement('div');
     card.classList.add('libcard')
@@ -33,10 +36,14 @@ const display = function() {
     card.appendChild(year);
     const read = document.createElement('input');
     read.classList.add('read');
-    read.setAttribute('type', 'button');
-    read.setAttribute('id', 'read');
-    read.setAttribute('value', `Read`)
+    read.setAttribute('type', 'checkbox');
+    read.setAttribute('id', 'unread');
+    read.setAttribute('name', `read`)
     card.appendChild(read);
+    const readLabel = document.createElement('label');
+    readLabel.setAttribute('for', 'read');
+    readLabel.classList.add('toggle');
+    card.appendChild(readLabel);
     const removecontainer = document.createElement('div');
     card.appendChild(removecontainer);
     const remove = document.createElement('button');
@@ -45,6 +52,8 @@ const display = function() {
     removecontainer.appendChild(remove);
     }
     listener();
+    boomButton = document.querySelectorAll('input.read');
+    label = document.querySelectorAll('label.toggle');
 }
 const book1 = new book("The Outlaw Ocean", "Ian Urbina", "Investigative Journalism", 560, 2019);
 const book2 = new book("Black Mass", "Dick Lehr", "Investigative Journalism", 448, 2012);
@@ -53,26 +62,31 @@ const modal = document.querySelector('div.addmodal');
 const addButton = document.querySelector('button.add');
 addButton.addEventListener('click', e => {
     modal.style.display = "block";
-    // const newTitle = new book(`${prompt(`Title:`)}`, `${prompt(`Author:`)}`, `${prompt(`Genre:`)}`, `${prompt(`Pages:`)}`, `${prompt(`Year:`)}`);
-    // console.log(newTitle);
-    // bookAdd(newTitle);
-    console.log(library);
-    display();
 })
+let libcards;
 const listener = function() {
 const removeButton = Array.from(document.querySelectorAll('button.remove'));
 removeButton.forEach(function(part, index) {
     removeButton[index].addEventListener('click', e => {
-        console.log(index);
         for (i=0; i<library.length; i++) {
-            const libcards = Array.from(document.querySelectorAll('div.libcard'));
+            libcards = Array.from(document.querySelectorAll('div.libcard'));
         if (index == libcards[i].id) {
             mainbody.removeChild(libcards[i]);
-            library.splice(index, 1);
-            console.log(library);
+            if (libcards.length == 1) {
+            library = [];
+            } else {
+            library.splice((index), 1);
+            }
         };
     }})
 })
+}
+const clearCards = function() {
+    libcards = Array.from(document.querySelectorAll('div.libcard'));
+    libcards.forEach(element => {
+        mainbody.removeChild(element);
+    })
+}
 const readButton = Array.from(document.querySelectorAll('input.read'));
 console.log(readButton);
 readButton.forEach(function(part, index) {
@@ -86,24 +100,58 @@ readButton.forEach(function(part, index) {
         };
     })
 })
+// event listeners for modal
+const closeBtn = document.querySelector('span.close');
+closeBtn.addEventListener('click', e => {
+    modal.style.display = "none";
+    clearForm();
+})
+const submitBtn = document.querySelector('input.submit');
+submitBtn.addEventListener('click', e => {
+    concatForm();
+    const newTitle = new book(inputValues[0], inputValues[1], inputValues[2], inputValues[3], inputValues[4],);
+    bookAdd(newTitle);
+    modal.style.display = "none";
+    display();
+    clearForm();
+    inputValues = [];
+})
+const resetBtn = document.querySelector('input.reset');
+resetBtn.addEventListener('click', e => {
+    clearForm();
+})
+const userInput = document.querySelectorAll('input.form');
+const clearForm = function() {
+    userInput.forEach(function(part, index) {
+    userInput[index].value = '';
+    })
 }
-
+let inputValues = [];
+const concatForm = function() {
+    userInput.forEach(function(part, index) {
+    inputValues.push(`${userInput[index].value}`);
+    })
+}
+//read button
+const boom = function() {
+// boomButton.forEach(function(part, index) {
+//     boomButton[index].addEventListener('click', e => {
+//         console.log(e.target);
+//         e.target.classList.toggle('active');
+//     })
+// })
+label.forEach(function(part, index) {
+    label[index].addEventListener('click', e => {
+       label[index].classList.toggle('active');
+    //    label[index].cssText = ""
+    })
+})
+}
 //issues:
-//typeerror: libcards[i] is undefined (but it is still removing the card from view)
 //read status would be cool as a toggle (read/unread) with different colors
-//
-
-
-
-// function display(book) {
-//     const div = document.createElement('div');
-//     mainbody.appendChild(div);
-//     div.textContent = `${book.title}`;
-// }
 //ideas:
 //outline of card with + inside, as the add button
-//event listeners and functions for close, submit, reset on "+"
-//figure out how to keep from duplicating libcards (or just wipe slate clean before running display() again)
+//styling of cards
 //header and footer. clever name? quote?
 // save data (to cloud? login feature needed?)
 // "share my library" feature
