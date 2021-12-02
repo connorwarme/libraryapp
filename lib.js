@@ -134,16 +134,9 @@ const concatForm = function() {
 }
 //read button
 const boom = function() {
-// boomButton.forEach(function(part, index) {
-//     boomButton[index].addEventListener('click', e => {
-//         console.log(e.target);
-//         e.target.classList.toggle('active');
-//     })
-// })
 label.forEach(function(part, index) {
     label[index].addEventListener('click', e => {
        label[index].classList.toggle('active');
-    //    label[index].cssText = ""
     })
 })
 }

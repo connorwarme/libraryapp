@@ -1,4 +1,5 @@
 .body {
+    font-family: 'Raleway';
     background-image: url('img/20211031-DSC00096-Edit.JPG');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -10,8 +11,15 @@
     align-items: flex-start;
 }
 .header {
+    font-size: 40px;
+    font-weight: 800;
+    border-bottom: 2px solid black;
     align-self: flex-start;
-    padding-left: 24px;
+    padding-left: 40px;
+    background-color: aliceblue;
+    height: 10%;
+    width: 98%;
+    opacity: 0.5;
 }
 .addcontainer {
     height: 250px;
@@ -27,6 +35,7 @@
     margin-top: 48px;
 }
 .add {
+    font-family: 'Raleway';
     border: 2px solid slategray;
     border-radius: 50%;
     width: 125px;
@@ -185,8 +194,21 @@
     }
 .active {
     background-color: green;
+    box-shadow:0 0 3px #fff,
+    0 0 5px #fff,
+    0 0 7px #fff,
+    0 0 11px rgb(12, 133, 1),
+    0 0 15px rgb(38, 150, 11),
+    0 0 19px rgb(30, 204, 44),
+    0 0 27px rgb(70, 236, 78),
+    0 0 31px rgb(156, 243, 153);
 }
 .toggle:active:after {
     width: 25px;
+}
+.submit,
+.reset,
+.remove {
+    font-family: 'Raleway';
 }
  
