@@ -5,21 +5,58 @@
     background-attachment: fixed;
     background-size: cover;
     min-height: 1000px;
-    width: auto;
+    width: 100%;
+    width: -moz-available;         
+    width: -webkit-fill-available;
+    width: stretch;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 40px;
     font-weight: 800;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid slategray;
     align-self: flex-start;
-    padding-left: 40px;
+    padding-left: 48px;
     background-color: aliceblue;
     height: 10%;
-    width: 98%;
+    width: inherit;
     opacity: 0.5;
+}
+.title {
+    align-self: center;
+}
+.quote {
+    width: 60%;
+    padding-right: 48px;
+    text-align: center;
+    margin-bottom: -42px;
+    margin-top: -42px;
+}
+.equote {
+    margin-bottom: -48px;
+}
+.main {
+    width: inherit;
+}
+.topthird {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.stats {
+    height: 250px;
+    width: 250px;
+    border: 2px solid slategray;
+    border-radius: 25px;
+    background-color: aliceblue;
+    opacity: 0.6;
+    margin: 48px;
 }
 .addcontainer {
     height: 250px;
@@ -27,12 +64,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid black;
-    border-radius: 10px;
+    border: 2px solid slategray;
+    border-radius: 25px;
     background-color: aliceblue;
     opacity: 0.6;
-    margin-left: 24px;
-    margin-top: 48px;
+    margin: 48px;
 }
 .add {
     font-family: 'Raleway';
@@ -75,7 +111,7 @@
     background-color: rgba(0,0,0,0.4);
 }
 .modalContent {
-    margin: 15% auto;
+    margin: 10% auto;
     width: min-content;
     display: flex;
     flex-direction: column;
@@ -113,10 +149,9 @@
 }
 .close {
     color: #aaa;
-    font-size: 32px;
+    font-size: 48px;
     font-weight: bold;
     padding-right: 15px;
-    padding-top: 12px;
   }
 .close:hover,
 .close:focus {
@@ -148,14 +183,35 @@
 .reset:hover {
     transform: scale(1.1);
 }
+.cardContainer {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 48px;
+    gap: 18px;
+}
 .libcard {
     height: 250px;
     width: 250px;
-    border: 2px solid black;
+    border: 2px solid slategray;
     border-radius: 10px;
     background-color: aliceblue;
     opacity: 0.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    
 }
+.cardTitle {
+    font-size: 24px;
+    font-weight: 800;
+}
+.cardAuthor {
+    font-size: 18px;
+}
+
 .read {
     display: none;
 }

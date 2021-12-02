@@ -12,27 +12,33 @@ const bookAdd = function(input) {
 let boomButton = document.querySelectorAll('input.read');
 let label = document.querySelectorAll('label.toggle');
 const mainbody = document.querySelector('div.main');
+const cardContainer = document.querySelector('div.cardContainer');
 const display = function() {
     clearCards();
     for (i=0; i<library.length; i++) {
     const card = document.createElement('div');
     card.classList.add('libcard')
     card.setAttribute('id', `${i}`);
-    mainbody.appendChild(card);
+    cardContainer.appendChild(card);
     const title = document.createElement('div');
-    title.textContent = `Title: ${library[i].title}`;
+    title.textContent = `${library[i].title}`;
+    title.classList.add('cardTitle');
     card.appendChild(title);
     const author = document.createElement('div');
-    author.textContent = `Author: ${library[i].author}`;
+    author.textContent = `${library[i].author}`;
+    author.classList.add('cardAuthor');
     card.appendChild(author);
     const genre = document.createElement('div');
-    genre.textContent = `Genre: ${library[i].genre}`;
+    genre.textContent = `${library[i].genre}`;
+    genre.classList.add('cardGenre');
     card.appendChild(genre);
     const pages = document.createElement('div');
-    pages.textContent = `Pages: ${library[i].pages}`;
+    pages.textContent = `${library[i].pages} pages`;
+    pages.classList.add('cardPages');
     card.appendChild(pages);
     const year = document.createElement('div');
-    year.textContent = `Published: ${library[i].year}`;
+    year.textContent = `${library[i].year}`;
+    year.classList.add('cardYear');
     card.appendChild(year);
     const read = document.createElement('input');
     read.classList.add('read');
@@ -71,7 +77,7 @@ removeButton.forEach(function(part, index) {
         for (i=0; i<library.length; i++) {
             libcards = Array.from(document.querySelectorAll('div.libcard'));
         if (index == libcards[i].id) {
-            mainbody.removeChild(libcards[i]);
+            cardContainer.removeChild(libcards[i]);
             if (libcards.length == 1) {
             library = [];
             } else {
@@ -84,7 +90,7 @@ removeButton.forEach(function(part, index) {
 const clearCards = function() {
     libcards = Array.from(document.querySelectorAll('div.libcard'));
     libcards.forEach(element => {
-        mainbody.removeChild(element);
+        cardContainer.removeChild(element);
     })
 }
 const readButton = Array.from(document.querySelectorAll('input.read'));
@@ -143,8 +149,9 @@ label.forEach(function(part, index) {
 //issues:
 //read status would be cool as a toggle (read/unread) with different colors
 //ideas:
-//outline of card with + inside, as the add button
 //styling of cards
+//check for book in library already
 //header and footer. clever name? quote?
-// save data (to cloud? login feature needed?)
-// "share my library" feature
+//save data (to cloud? login feature needed?)
+//"share my library" feature
+//sort feature
