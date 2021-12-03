@@ -97,6 +97,7 @@ const clearCards = function() {
         cardContainer.removeChild(element);
     })
 }
+//read/unread toggle
 const readButton = Array.from(document.querySelectorAll('input.read'));
 console.log(readButton);
 readButton.forEach(function(part, index) {
@@ -109,6 +110,18 @@ readButton.forEach(function(part, index) {
             readButton[index].setAttribute('value', 'Read');
         };
     })
+})
+//check for book in library
+// const inLibrary = function(input) {
+//     for (i=0; i<library.length; i++) {
+//        if (library[i].title === input) {
+//     return console.log('clear');
+//        } else {
+//            console.log('no bueno');
+//        }}
+// }
+const checkBook = library.some(e => {
+    e === library.title
 })
 // event listeners for modal
 const closeBtn = document.querySelector('span.close');
@@ -194,6 +207,7 @@ stats.appendChild(totalRead);
 display();
 listener();
 boom();
+// console.log(library.some(checkBook));
 //issues:
 
 //ideas:
