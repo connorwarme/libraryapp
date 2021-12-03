@@ -9,7 +9,6 @@ const book = function(title, author, genre, pages, year) {
 const bookAdd = function(input) {
     library.push(input);
 }
-let boomButton = document.querySelectorAll('input.read');
 let label = document.querySelectorAll('label.toggle');
 const mainbody = document.querySelector('div.main');
 const cardContainer = document.querySelector('div.cardContainer');
@@ -49,16 +48,21 @@ const display = function() {
     const readLabel = document.createElement('label');
     readLabel.setAttribute('for', 'read');
     readLabel.classList.add('toggle');
+    readLabel.textContent = `Unread`;
     card.appendChild(readLabel);
-    const removecontainer = document.createElement('div');
-    card.appendChild(removecontainer);
+    const removeContainer = document.createElement('div');
+    removeContainer.classList.add('removeContainer')
+    card.appendChild(removeContainer);
     const remove = document.createElement('button');
     remove.classList.add('remove');
-    remove.textContent = `Remove book from library`;
-    removecontainer.appendChild(remove);
+    remove.textContent = `Delete`;
+    removeContainer.appendChild(remove);
+    const number = document.createElement('div');
+    number.classList.add('number');
+    number.textContent = `#${i + 1}`;
+    removeContainer.appendChild(number);
     }
     listener();
-    boomButton = document.querySelectorAll('input.read');
     label = document.querySelectorAll('label.toggle');
 }
 const book1 = new book("The Outlaw Ocean", "Ian Urbina", "Investigative Journalism", 560, 2019);
@@ -143,15 +147,58 @@ const boom = function() {
 label.forEach(function(part, index) {
     label[index].addEventListener('click', e => {
        label[index].classList.toggle('active');
+       if (label[index].className == `toggle active`) {
+       label[index].textContent = `Read`;
+       } else {
+        label[index].textContent = `Unread`;
+       }
     })
 })
 }
+//stats box
+const stats = document.querySelector('div.statsContainer');
+const totalBooks = document.createElement('div');
+totalBooks.classList.add('tally');
+totalBooks.textContent = `Total Books: ${library.length}`;
+stats.appendChild(totalBooks);
+let pageTotal = 0;
+// for (i=0; i<library.length; i++) {
+//     pageTotal += library[i].pages;
+// }
+const totalPages = document.createElement('div');
+totalPages.classList.add('tally');
+totalPages.textContent = `Total Pages: ${pageTotal}`;
+stats.appendChild(totalPages);
+const updateStats = function() {
+    pageTotal = 0;
+    console.log(pageTotal);
+    for (i=0; i<library.length; i++) {
+        pageTotal += Number(library[i].pages);
+    }
+    totalPages.textContent = `Total Pages: ${pageTotal}`;
+    totalBooks.textContent = `Total Books: ${library.length}`;
+}
+let readTotal = 0;
+const getReadTotal = function() {
+    for (i=0; i<library.length; i++) {
+        if (label[i].className == `toggle active`) {
+            readTotal += Number(library[i].pages)
+        }
+    }
+    totalRead.textContent = `Total Read: ${readTotal}`;
+} 
+const totalRead = document.createElement('div');
+totalRead.classList.add('tally');
+totalRead.textContent = `Total Read: ${readTotal}`;
+stats.appendChild(totalRead);
+display();
+listener();
+boom();
 //issues:
-//read status would be cool as a toggle (read/unread) with different colors
+
 //ideas:
-//styling of cards
 //check for book in library already
-//header and footer. clever name? quote?
+//footer. 
 //save data (to cloud? login feature needed?)
 //"share my library" feature
 //sort feature

@@ -49,7 +49,7 @@
     flex-direction: row;
     justify-content: space-between;
 }
-.stats {
+.statsCard {
     height: 250px;
     width: 250px;
     border: 2px solid slategray;
@@ -57,6 +57,24 @@
     background-color: aliceblue;
     opacity: 0.6;
     margin: 48px;
+}
+.stats {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    padding: 8px;
+}
+.statsContainer {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 2px solid slategray;
+    font-size: 24px;
+}
+.tally {
+   padding: 16px; 
 }
 .addcontainer {
     height: 250px;
@@ -216,6 +234,11 @@
     display: none;
 }
 .toggle {
+    text-align: end;
+    padding-right: 16px;
+    padding-top: 7px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     display: block;
     width: 100px;
     height: 25px;
@@ -235,20 +258,24 @@
 }
 .toggle::after {
     content: "";
-    width: 21px;
-    height: 21px;
+    width: 28px;
+    height: 28px;
     background-color: #e8f5f7;
     position: absolute;
-    border-radius: 10.5px;
+    border-radius: 14px;
     top: 2px;
     left: 5px;
-    transition: 0.5s;
+    transition: .5s;
 }
 .active::after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
     }
 .active {
+    transition-duration: 1s;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 6px;
     background-color: green;
     box-shadow:0 0 3px #fff,
     0 0 5px #fff,
@@ -260,11 +287,32 @@
     0 0 31px rgb(156, 243, 153);
 }
 .toggle:active:after {
-    width: 25px;
+    width: 32px;
 }
 .submit,
 .reset,
 .remove {
     font-family: 'Raleway';
 }
- 
+.removeContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: inherit;
+}
+.remove {
+    border: 2px solid slategray;
+    border-radius: 10px;
+    font-size: 16px;
+    padding: 6px;
+    margin-right: 10px;
+}
+.remove:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+.number {
+    margin-left: 16px;
+    margin-bottom: -4px;
+}
