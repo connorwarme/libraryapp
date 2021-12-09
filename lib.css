@@ -59,7 +59,7 @@
     margin: 48px;
 }
 .stats {
-    font-size: 36px;
+    font-size: 24px;
     font-weight: 800;
     text-align: center;
     padding: 8px;
@@ -74,7 +74,7 @@
     font-size: 24px;
 }
 .tally {
-   padding: 16px; 
+   padding: 10px; 
 }
 .addcontainer {
     height: 250px;
@@ -246,7 +246,7 @@
     border-radius: 50px;
     position: relative;
     cursor: pointer;
-    transition: 0.5s;
+    /* transition: 0.5s; */
     box-shadow:0 0 3px #fff,
     0 0 5px #fff,
     0 0 7px #fff,
@@ -265,14 +265,14 @@
     border-radius: 14px;
     top: 2px;
     left: 5px;
-    transition: .5s;
+    /* transition: .5s; */
 }
 .active::after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
     }
 .active {
-    transition-duration: 1s;
+    /* transition-duration: 1s; */
     text-align: center;
     margin-top: 6px;
     margin-bottom: 6px;
@@ -316,3 +316,11 @@
     margin-left: 16px;
     margin-bottom: -4px;
 }
+/* .footer {
+    padding-top: 100px;
+    width: inherit;
+    height: 20px;
+    background-color: aliceblue;
+    border-top: 2px solid slategray;
+    opacity: 0.5;
+} */
