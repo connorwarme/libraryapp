@@ -4,6 +4,7 @@
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    position: relative;
     min-height: 1000px;
     width: 100%;
     width: -moz-available;         
@@ -86,7 +87,8 @@
     border-radius: 25px;
     background-color: aliceblue;
     opacity: 0.6;
-    margin: 48px;
+    margin-top: 48px;
+    margin-left: 48px;
 }
 .add {
     font-family: 'Raleway';
@@ -246,7 +248,7 @@
     border-radius: 50px;
     position: relative;
     cursor: pointer;
-    /* transition: 0.5s; */
+    transition: 0.5s;
     box-shadow:0 0 3px #fff,
     0 0 5px #fff,
     0 0 7px #fff,
@@ -265,14 +267,14 @@
     border-radius: 14px;
     top: 2px;
     left: 5px;
-    /* transition: .5s; */
+    transition: .5s;
 }
 .active::after {
     left: calc(100% - 5px);
     transform: translateX(-100%);
     }
 .active {
-    /* transition-duration: 1s; */
+    transition-duration: 1s;
     text-align: center;
     margin-top: 6px;
     margin-bottom: 6px;
@@ -316,11 +318,35 @@
     margin-left: 16px;
     margin-bottom: -4px;
 }
-/* .footer {
-    padding-top: 100px;
+.footer {
+    position: absolute;
+    bottom: 0%;
+    margin-top: 100px;
+    padding: 20px;
     width: inherit;
-    height: 20px;
     background-color: aliceblue;
     border-top: 2px solid slategray;
-    opacity: 0.5;
-} */
+    opacity: 0.6;
+}
+.credits {
+    font-size: 24px;
+    font-weight: 800;
+    padding-left: 3%;
+    opacity: 1;
+}
+.photocred {
+    font-size: 18px;
+    padding-left: 3%;
+    opacity: 1;
+}
+a:link {
+    text-decoration: none;
+    color: slategray;
+}
+a:visited {
+    color: steelblue;
+}
+a:hover {
+    color: darkorchid;
+    opacity: 1;
+}

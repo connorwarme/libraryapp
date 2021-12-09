@@ -242,8 +242,9 @@ display();
 listener();
 boom();
 updateStats();
-//issues:
 
+//issues:
+//when you delete #1, then cant use read/unread toggle. typeerror: label[index] is undefined.(in boom function)
 //ideas:
 //footer. 
 //save data (to cloud? login feature needed?)
