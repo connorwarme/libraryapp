@@ -8,8 +8,10 @@ const book = function(title, author, genre, pages, year) {
 }
 const bookAdd = function(input) {
     library.push(input);
+    boom();
 }
 let label = document.querySelectorAll('label.toggle');
+console.log(label);
 const mainbody = document.querySelector('div.main');
 const cardContainer = document.querySelector('div.cardContainer');
 const display = function() {
@@ -89,8 +91,17 @@ removeButton.forEach(function(part, index) {
             }
         };}
         updateStats();
+        removeListener;
+        boom();
     })
 })
+}
+const removeListener = function() {
+    label = document.querySelectorAll('label.toggle');
+    label.forEach(function(part, index) {
+        console.log(label[index]);
+        label[index].removeEventListener('click', addReadListener);
+    })
 }
 const clearCards = function() {
     libcards = Array.from(document.querySelectorAll('div.libcard'));
@@ -115,14 +126,14 @@ const clearCards = function() {
 //     })
 // })
 //check for book in library
-const inLibrary = function(input) {
-    for (i=0; i<library.length; i++) {
-       if (library[i].title === input.title) {
-    return alert(`That book is already in the library!`);
-       } else {
-           bookAdd(newTitle);
-       }}
-}
+// const inLibrary = function(input) {
+//     for (i=0; i<library.length; i++) {
+//        if (library[i].title === input.title) {
+//     return alert(`That book is already in the library!`);
+//        } else {
+//            bookAdd(newTitle);
+//        }}
+// }
 // const checkBook = library.some(e => {
 //     e.title === library.title;
 // })
@@ -132,6 +143,18 @@ closeBtn.addEventListener('click', e => {
     modal.style.display = "none";
     clearForm();
 })
+const inLibrary = function(input) {
+    let x = 0;
+    for (i=0; i<library.length; i++) {
+      if (library[i].title === input.title) {
+          x++;
+    return alert(`That book is already in the library!`);
+    }}
+    if (x == 0) {
+    bookAdd(input);
+    console.log(`book add`);
+    }
+}
 const submitBtn = document.querySelector('input.submit');
 submitBtn.addEventListener('click', e => {
     concatForm();
@@ -160,17 +183,42 @@ const concatForm = function() {
 }
 //read button
 const boom = function() {
-label.forEach(function(part, index) {
-    label[index].addEventListener('click', e => {
-       label[index].classList.toggle('active');
-       if (label[index].className == `toggle active`) {
-       label[index].textContent = `Read`;
+    label = document.querySelectorAll('label.toggle');
+    console.log(label.length);
+    // if (label.length === 1) {
+    //     label[0].addEventListener('click', e => {
+    //     label[0].classList.toggle('active');
+    //     if (label.className == `toggle active`) {
+    //     label[0].textContent = `Read`;
+    //     } else {
+    //      label[0].textContent = `Unread`;
+    //     }
+    //     updateStats();
+    // })
+    // } else {
+        console.log(`else`);
+    label.forEach(addReadListener)
+    //    label[index].addEventListener('click', e => {
+    //    label[index].classList.toggle('active');
+    //    if (label[index].className == `toggle active`) {
+    //    label[index].textContent = `Read`;
+    //    } else {
+    //    label[index].textContent = `Unread`;
+    //    }
+       updateStats();
+    // })})
+}
+const addReadListener = function(part, index) {
+    const labelToggle = document.getElementsByClassName(`toggle`);
+    labelToggle[index].addEventListener('click', e => {
+       labelToggle[index].classList.toggle('active');
+       if (labelToggle[index].className == `toggle active`) {
+       labelToggle[index].textContent = `Read`;
        } else {
-        label[index].textContent = `Unread`;
+        labelToggle[index].textContent = `Unread`;
        }
        updateStats();
     })
-})
 }
 //stats box
 const stats = document.querySelector('div.statsContainer');
@@ -205,10 +253,6 @@ const checkTotalPages = function() {
     pageTotal += Number(library[i].pages);
     totalPages.textContent = `Total Pages: ${pageTotal}`;
     }
-    // library.forEach(e => {
-    //     pageTotal += Number(library[e].pages);
-    // })
-    // totalPages.textContent = `Total Pages: ${pageTotal}`;
 }
 let pagesRead = 0;
 const checkPagesRead = function() {
@@ -245,8 +289,8 @@ updateStats();
 
 //issues:
 //when you delete #1, then cant use read/unread toggle. typeerror: label[index] is undefined.(in boom function)
+//numberDiv (when you delete all items)
 //ideas:
-//footer. 
 //save data (to cloud? login feature needed?)
 //"share my library" feature
 //sort feature
