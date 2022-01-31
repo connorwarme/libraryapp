@@ -238,6 +238,7 @@ stats.appendChild(totalRead);
 //stats functions
 let booksReadNumber = 0;
 const checkBooksRead = function() {
+    label = document.querySelectorAll('label.toggle');
     booksReadNumber = 0;
     for (i=0; i<library.length; i++) {
         if (label[i].className == `toggle active`) {
