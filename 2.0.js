@@ -34,6 +34,9 @@ const Book = function(title, author, pages, read, dataValue) {
         const readLabel = document.createElement('label');
         readLabel.setAttribute('for', 'read');
         readLabel.classList.add('toggle');
+        if (this.read == 'Read') {
+            readLabel.classList.add('active');
+        }
         readLabel.textContent = `${this.read}`;
         card.appendChild(readLabel);
         const removeContainer = document.createElement('div');
@@ -47,21 +50,29 @@ const Book = function(title, author, pages, read, dataValue) {
         number.classList.add('number');
         // number.textContent = `#${i + 1}`;
         removeContainer.appendChild(number);
-        return readLabel;
     }
     const updateRead = function() {
+        const getCard = document.getElementById(`${this.dataValue}`);
+        const getLabel = getCard.querySelector('label');
         if (this.read == 'Unread') {
             this.read = 'Read';
+            getLabel.classList.add('active');
         }
         else {
             this.read = 'Unread';
+            getLabel.classList.remove('active');
         }
-        const getCard = document.getElementById(`${this.dataValue}`);
-        const getLabel = getCard.querySelector('label');
         getLabel.textContent = `${this.read}`;
         return console.log(`${this.read}`);
     }
-    return {title, author, genre, pages, read, dataValue, updateRead, display};
+    const deleteCard = function() {
+        const cardContainer = document.querySelector(`div.cardContainer`);
+        console.log(this.dataValue);
+        const libCard = document.getElementById(`${this.dataValue}`);
+        cardContainer.removeChild(libCard);
+        // const getButton = getCard.querySelector('button.remove');
+    }
+    return {title, author, genre, pages, read, dataValue, updateRead, deleteCard, display};
 }
 // create book prototype
 Object.prototype.addToLibrary = function() {
@@ -107,7 +118,7 @@ Object.prototype.addToLibrary = function() {
     // }
 
 let book1 = new Book('A Very Punchable Face', 'Colin Jost', 346, 'Read');
-let book2 = new Book('Emperor of All Maladies', 'Siddhartha Mukherjee', 608, 'Read');
+let book2 = new Book('Emperor of All Maladies', 'Siddhartha Mukherjee', 608, 'Unread');
 book1.addToLibrary();
 book2.addToLibrary();
 // book1.display();
@@ -119,7 +130,32 @@ const displayLibrary = () => {
         myLibrary[i].dataValue = (i);
     }
 }
-const findCard =  myLibrary.filter(x => x == this.dataValue);
+const updateLibrary = (input) => {
+    for (i=0; i<myLibrary.length; i++) {
+        if (input == i) {
+            if (myLibrary.length == 1) {
+                console.log('bingo');
+                myLibrary = [];
+            }
+            else {
+            myLibrary.splice(i, 1);
+            console.log(myLibrary);
+            }
+        }
+    }
+}
+const updateNumber = function() {
+    const cardNumber = Array.from(cardContainer.querySelectorAll('div.number'));
+    console.log(cardNumber);
+    for (i=0; i<myLibrary.length; i++) {
+        myLibrary[i].dataValue = i;
+        cardNumber[i].textContent = `#${i + 1}`;
+    }
+    for (i=0; i<cardNumber.length; i++) {
+        console.log(cardNumber[i]);
+    }
+}
+// const findCard =  myLibrary.filter(x => x == this.dataValue);
 
 // loop thru array & display
 
@@ -174,4 +210,4 @@ const findCard =  myLibrary.filter(x => x == this.dataValue);
     // removeContainer.appendChild(number);
 //     }
 // }
-// displayLibrary();
+displayLibrary();
