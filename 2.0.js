@@ -3,7 +3,6 @@ const cardContainer = document.querySelector('div.cardContainer');
 const Book = function(title, author, pages, read, dataValue) {
     this.title = title;
     this.author = author;
-    // this.genre = genre;
     this.pages = pages;
     this.read = read;
     this.dataValue = `-1`;
@@ -23,10 +22,6 @@ const Book = function(title, author, pages, read, dataValue) {
         author.textContent = `${this.author}`;
         author.classList.add('cardAuthor');
         card.appendChild(author);
-        // const genre = document.createElement('div');
-        // genre.textContent = `${this.genre}`;
-        // genre.classList.add('cardGenre');
-        // card.appendChild(genre);
         const pages = document.createElement('div');
         pages.textContent = `${this.pages} pages`;
         pages.classList.add('cardPages');
@@ -48,7 +43,6 @@ const Book = function(title, author, pages, read, dataValue) {
         removeContainer.appendChild(remove);
         const number = document.createElement('div');
         number.classList.add('number');
-        // number.textContent = `#${i + 1}`;
         removeContainer.appendChild(number);
     }
     const updateRead = function() {
@@ -70,7 +64,6 @@ const Book = function(title, author, pages, read, dataValue) {
         console.log(this.dataValue);
         const libCard = document.getElementById(`${this.dataValue}`);
         cardContainer.removeChild(libCard);
-        // const getButton = getCard.querySelector('button.remove');
     }
     return {title, author, genre, pages, read, dataValue, updateRead, deleteCard, display};
 }
@@ -119,9 +112,10 @@ Object.prototype.addToLibrary = function() {
 
 let book1 = new Book('A Very Punchable Face', 'Colin Jost', 346, 'Read');
 let book2 = new Book('Emperor of All Maladies', 'Siddhartha Mukherjee', 608, 'Unread');
+let book3 = new Book('Zero Fail', 'Carol Leonig', 561, 'Read');
 book1.addToLibrary();
 book2.addToLibrary();
-// book1.display();
+book3.addToLibrary();
 const displayLibrary = () => {
     for (i=0; i<myLibrary.length; i++) {
         myLibrary[i].display();
@@ -134,26 +128,38 @@ const updateLibrary = (input) => {
     for (i=0; i<myLibrary.length; i++) {
         if (input == i) {
             if (myLibrary.length == 1) {
-                console.log('bingo');
                 myLibrary = [];
             }
             else {
             myLibrary.splice(i, 1);
-            console.log(myLibrary);
             }
         }
     }
 }
 const updateNumber = function() {
     const cardNumber = Array.from(cardContainer.querySelectorAll('div.number'));
-    console.log(cardNumber);
+    let dataAttribute = Array.from(cardContainer.querySelectorAll('div.bookCard'));
     for (i=0; i<myLibrary.length; i++) {
         myLibrary[i].dataValue = i;
+        dataAttribute[i].setAttribute('id', `${i}`);
         cardNumber[i].textContent = `#${i + 1}`;
     }
-    for (i=0; i<cardNumber.length; i++) {
-        console.log(cardNumber[i]);
-    }
+}
+const listener = function() {
+    const deleteButton = Array.from(document.querySelectorAll('button.remove'));
+    deleteButton.forEach(function(part, index) {
+        deleteButton[index].addEventListener('click', (e) => {
+            let x = e.target.parentNode.parentNode;
+            runItBack(x.id);
+        })
+        
+    })
+}
+const runItBack = function(input) {
+    myLibrary[input].deleteCard();
+    updateLibrary(input);
+    updateNumber();
+    console.log('you did it..?');
 }
 // const findCard =  myLibrary.filter(x => x == this.dataValue);
 
@@ -211,3 +217,4 @@ const updateNumber = function() {
 //     }
 // }
 displayLibrary();
+listener();
