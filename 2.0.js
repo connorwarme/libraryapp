@@ -74,7 +74,6 @@ book1.addToLibrary();
 book2.addToLibrary();
 book3.addToLibrary();
 const displayLibrary = () => {
-    
     for (i=0; i<myLibrary.length; i++) {
         myLibrary[i].display();
         let dataAttribute = document.querySelector('div.bookCard#null');
@@ -103,12 +102,18 @@ const updateNumber = function() {
         cardNumber[i].textContent = `#${i + 1}`;
     }
 }
+const deleteFn = function(input) {
+    myLibrary[input].deleteCard();
+    updateLibrary(input);
+    updateNumber();
+    updateStats();
+}
 const listener = function() {
     const deleteButton = Array.from(document.querySelectorAll('button.remove'));
     deleteButton.forEach(function(part, index) {
         deleteButton[index].addEventListener('click', (e) => {
             let x = e.target.parentNode.parentNode;
-            runItBack(x.id);
+            deleteFn(x.id);
         }) 
     })
     const readLabel = Array.from(document.querySelectorAll('label.toggle'));
@@ -116,6 +121,7 @@ const listener = function() {
         readLabel[index].addEventListener('click', (e) => {
             let x = e.target.parentNode;
             myLibrary[x.id].updateRead();
+            updateStats();
         })
     })
 }
@@ -125,12 +131,13 @@ const individualCardListener = function(input) {
     const deleteButton = card.querySelector('button.remove');
     deleteButton.addEventListener('click', (e) => {
         let x = e.target.parentNode.parentNode;
-        runItBack(x.id);
+        deleteFn(x.id);
     })
     const readLabel = card.querySelector('label.toggle');
     readLabel.addEventListener('click', (e) => {
         let x = e.target.parentNode;
         myLibrary[x.id].updateRead();
+        updateStats();
     })
 }
 // modal listeners / functions
@@ -174,59 +181,75 @@ const modalListener = () => {
         })
             console.log(inputValues);
     }
+    const addReadStatus = () => {
+        const select = document.querySelector('select');
+        inputValues.push(`${select.value}`);
+    }
     const submitBtn = document.querySelector('input.submit');
     submitBtn.addEventListener('click', e => {
         concatForm();
+        addReadStatus();
         const newBook = new Book(inputValues[0], inputValues[1], inputValues[2], inputValues[3]);
-        console.log(inLibrary(newBook));
+        updateStats();
         modal.style.display = "none";
         clearForm();
         inputValues = [];
     })
 }
-// const inLibrary = function(input) {
-//     let x = 0;
-//     for (i=0; i<library.length; i++) {
-//       if (library[i].title === input.title) {
-//           x++;
-//     return alert(`That book is already in the library!`);
-//     }}
-//     if (x == 0) {
-//     bookAdd(input);
-//     console.log(`book add`);
-//     }
-// }
-// const submitBtn = document.querySelector('input.submit');
-// submitBtn.addEventListener('click', e => {
-//     concatForm();
-//     const newTitle = new book(inputValues[0], inputValues[1], inputValues[2], inputValues[3], inputValues[4],);
-//     inLibrary(newTitle);
-//     modal.style.display = "none";
-//     display();
-//     clearForm();
-//     inputValues = [];
-// })
-// const resetBtn = document.querySelector('input.reset');
-// resetBtn.addEventListener('click', e => {
-//     clearForm();
-// })
-// const userInput = document.querySelectorAll('input.form');
-// const clearForm = function() {
-//     userInput.forEach(function(part, index) {
-//     userInput[index].value = '';
-//     })
-// }
-// let inputValues = [];
-// const concatForm = function() {
-//     userInput.forEach(function(part, index) {
-//     inputValues.push(`${userInput[index].value}`);
-//     })
-// }
-const runItBack = function(input) {
-    myLibrary[input].deleteCard();
-    updateLibrary(input);
+// stats box
+const stats = document.querySelector('div.statsContainer');
+const totalBooks = document.createElement('div');
+totalBooks.classList.add('tally');
+totalBooks.textContent = `Total Books: ${myLibrary.length}`;
+stats.appendChild(totalBooks);
+const booksRead = document.createElement('div');
+booksRead.classList.add('tally');
+stats.appendChild(booksRead);
+const totalPages = document.createElement('div');
+totalPages.classList.add('tally');
+stats.appendChild(totalPages);
+const totalRead = document.createElement('div');
+totalRead.classList.add('tally');
+stats.appendChild(totalRead);
+const updateStats = function() {
+    label = document.querySelectorAll('label.toggle');
+// stats functions
+    let booksReadNumber = 0;
+    const checkBooksRead = function() {
+        label = document.querySelectorAll('label.toggle');
+        booksReadNumber = 0;
+        for (i=0; i<myLibrary.length; i++) {
+            if (label[i].className == `toggle active`) {
+            ++booksReadNumber;
+            }
+        }
+        booksRead.textContent = `Books Read: ${booksReadNumber}`;
+    } 
+    let pageTotal = 0;
+    const checkTotalPages = function() {
+        pageTotal = 0;
+        for (i=0; i<myLibrary.length; i++) {
+            pageTotal += Number(myLibrary[i].pages);
+            totalPages.textContent = `Total Pages: ${pageTotal}`;
+        }
+    }
+    let pagesRead = 0;
+    const checkPagesRead = function() {
+        pagesRead = 0;
+        for (i=0; i<myLibrary.length; i++) {
+            if (label[i].className == `toggle active`) {
+            pagesRead += Number(myLibrary[i].pages)
+            }
+        }
+        totalRead.textContent = `Pages Read: ${pagesRead}`;
+    }
+    checkBooksRead();
+    checkTotalPages();
+    checkPagesRead();
     updateNumber();
+    totalBooks.textContent = `Total Books: ${myLibrary.length}`;
 }
 displayLibrary();
 listener();
 modalListener();
+updateStats();
