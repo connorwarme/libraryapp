@@ -74,6 +74,7 @@ book1.addToLibrary();
 book2.addToLibrary();
 book3.addToLibrary();
 const displayLibrary = () => {
+    
     for (i=0; i<myLibrary.length; i++) {
         myLibrary[i].display();
         let dataAttribute = document.querySelector('div.bookCard#null');
@@ -118,6 +119,20 @@ const listener = function() {
         })
     })
 }
+const individualCardListener = function(input) {
+    console.log(input);
+    const card = document.getElementById(`${input}`);
+    const deleteButton = card.querySelector('button.remove');
+    deleteButton.addEventListener('click', (e) => {
+        let x = e.target.parentNode.parentNode;
+        runItBack(x.id);
+    })
+    const readLabel = card.querySelector('label.toggle');
+    readLabel.addEventListener('click', (e) => {
+        let x = e.target.parentNode;
+        myLibrary[x.id].updateRead();
+    })
+}
 // modal listeners / functions
 const modalListener = () => {
     const modal = document.querySelector('div.addmodal');
@@ -144,9 +159,12 @@ const modalListener = () => {
         console.log(check);
         if (check == undefined) {
             input.addToLibrary();
+            input.display();
+            updateNumber();
+            individualCardListener(`${myLibrary.length-1}`);
             console.log(myLibrary);
         } else {
-            alert(`no bueno`);
+            alert(`This book is already in the library!`);
         }
     }
     let inputValues = [];
@@ -162,7 +180,6 @@ const modalListener = () => {
         const newBook = new Book(inputValues[0], inputValues[1], inputValues[2], inputValues[3]);
         console.log(inLibrary(newBook));
         modal.style.display = "none";
-        // displayLibrary();
         clearForm();
         inputValues = [];
     })
