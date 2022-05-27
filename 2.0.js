@@ -54,11 +54,9 @@ const Book = function(title, author, pages, read, dataValue) {
             getLabel.classList.remove('active');
         }
         getLabel.textContent = `${this.read}`;
-        return console.log(`${this.read}`);
     }
     const deleteCard = function() {
         const cardContainer = document.querySelector(`div.cardContainer`);
-        console.log(this.dataValue);
         const libCard = document.getElementById(`${this.dataValue}`);
         cardContainer.removeChild(libCard);
     }
@@ -114,7 +112,8 @@ const listener = function() {
         deleteButton[index].addEventListener('click', (e) => {
             let x = e.target.parentNode.parentNode;
             deleteFn(x.id);
-        }) 
+            updateStats();
+        })
     })
     const readLabel = Array.from(document.querySelectorAll('label.toggle'));
     readLabel.forEach(function(part, index) {
@@ -132,6 +131,7 @@ const individualCardListener = function(input) {
     deleteButton.addEventListener('click', (e) => {
         let x = e.target.parentNode.parentNode;
         deleteFn(x.id);
+        updateStats();
     })
     const readLabel = card.querySelector('label.toggle');
     readLabel.addEventListener('click', (e) => {
@@ -190,6 +190,7 @@ const modalListener = () => {
         concatForm();
         addReadStatus();
         const newBook = new Book(inputValues[0], inputValues[1], inputValues[2], inputValues[3]);
+        inLibrary(newBook);
         updateStats();
         modal.style.display = "none";
         clearForm();
@@ -230,8 +231,8 @@ const updateStats = function() {
         pageTotal = 0;
         for (i=0; i<myLibrary.length; i++) {
             pageTotal += Number(myLibrary[i].pages);
-            totalPages.textContent = `Total Pages: ${pageTotal}`;
         }
+        totalPages.textContent = `Total Pages: ${pageTotal}`;
     }
     let pagesRead = 0;
     const checkPagesRead = function() {
