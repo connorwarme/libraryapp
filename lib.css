@@ -120,6 +120,7 @@
 .add:hover {
     opacity: 1;
     transform: scale(1.1);
+    cursor: pointer;
   }
 .addmodal {
     display: none;
@@ -335,6 +336,7 @@
 .remove:hover {
     transform: scale(1.1);
     opacity: 1;
+    cursor: pointer;
 }
 .number {
     margin-left: 16px;
@@ -369,6 +371,6 @@ a:visited {
     color: steelblue;
 }
 a:hover {
-    color: darkorchid;
+    color: black;
     opacity: 1;
 }
