@@ -1,12 +1,14 @@
 let myLibrary = [];
 const cardContainer = document.querySelector('div.cardContainer');
-const Book = function(title, author, pages, read, dataValue) {
+class Book {
+    constructor(title, author, pages, read, dataValue) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
     this.dataValue = `-1`;
-    const display = function() {
+    }
+    display() {
         const card = document.createElement('div');
         card.classList.add('bookCard');
         card.setAttribute('id', `null`);
@@ -42,7 +44,7 @@ const Book = function(title, author, pages, read, dataValue) {
         number.classList.add('number');
         removeContainer.appendChild(number);
     }
-    const updateRead = function() {
+    updateRead() {
         const getCard = document.getElementById(`${this.dataValue}`);
         const getLabel = getCard.querySelector('label');
         if (this.read == 'Unread') {
@@ -55,15 +57,15 @@ const Book = function(title, author, pages, read, dataValue) {
         }
         getLabel.textContent = `${this.read}`;
     }
-    const deleteCard = function() {
+    deleteCard() {
         const cardContainer = document.querySelector(`div.cardContainer`);
         const libCard = document.getElementById(`${this.dataValue}`);
         cardContainer.removeChild(libCard);
     }
-    const addToLibrary = function() {
+    addToLibrary() {
         myLibrary.push(this);
     }
-    return {title, author, pages, read, dataValue, updateRead, deleteCard, display, addToLibrary};
+    // return {title, author, pages, read, dataValue, updateRead, deleteCard, display, addToLibrary};
 }
 let book1 = new Book('A Very Punchable Face', 'Colin Jost', 346, 'Read');
 let book2 = new Book('Emperor of All Maladies', 'Siddhartha Mukherjee', 608, 'Unread');
