@@ -7,8 +7,6 @@
     position: relative;
     min-height: 1000px;
     width: 100%;
-    width: -moz-available;         
-    width: -webkit-fill-available;
     width: stretch;
     display: flex;
     flex-direction: column;
@@ -116,11 +114,12 @@
 .add::before {
     transform: rotate(90deg);
 }
+/* not sure why this transform isn't getting added ... */
 .add:hover {
     opacity: 1;
     transform: scale(1.1);
     cursor: pointer;
-  }
+}
 .addmodal {
     display: none;
     position: fixed;
