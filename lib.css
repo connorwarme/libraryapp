@@ -113,6 +113,9 @@
   position: absolute;
   border-radius: 6px;
 }
+.add::before {
+    transform: rotate(90deg);
+}
 .add:hover {
     opacity: 1;
     transform: scale(1.1);
